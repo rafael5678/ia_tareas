@@ -397,50 +397,51 @@ export default function AIAssistantUniversal() {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 animate-fade-in pb-20 lg:pb-0">
       {/* Chat Area */}
-      <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-gray-100 flex flex-col h-[calc(100vh-250px)]">
+      <div className="lg:col-span-2 bg-white rounded-xl sm:rounded-2xl shadow-lg border border-gray-100 flex flex-col h-[calc(100vh-180px)] sm:h-[calc(100vh-200px)] lg:h-[calc(100vh-250px)]">
         {/* Header */}
-        <div className="p-6 border-b border-gray-100">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 rounded-xl flex items-center justify-center animate-bounce-subtle">
-                <Sparkles className="w-6 h-6 text-white" />
+        <div className="p-3 sm:p-4 md:p-6 border-b border-gray-100">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center animate-bounce-subtle flex-shrink-0">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
               </div>
-              <div>
-                <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Asistente Universal IA
+              <div className="min-w-0">
+                <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent truncate">
+                  Asistente IA
                 </h3>
-                <p className="text-sm text-gray-500">Ayuda con cualquier materia 🎓</p>
+                <p className="text-xs sm:text-sm text-gray-500 hidden sm:block truncate">Ayuda con cualquier materia 🎓</p>
               </div>
             </div>
             
             {/* Botones de acción */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2 flex-wrap justify-end">
               <button
                 onClick={saveCurrentConversation}
                 disabled={messages.length <= 1}
-                className="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                title="Guardar conversación"
+                className="px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
+                title="Guardar"
               >
-                <Save className="w-4 h-4" />
+                <Save className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden md:inline">Guardar</span>
               </button>
               <button
                 onClick={() => setShowHistory(!showHistory)}
-                className="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center gap-2 relative"
+                className="px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm border border-gray-200 rounded-lg hover:bg-gray-50 flex items-center gap-1 relative"
                 title="Historial"
               >
-                <History className="w-4 h-4" />
+                <History className="w-3 h-3 sm:w-4 sm:h-4" />
                 {conversations.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] sm:text-xs rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center">
                     {conversations.length}
                   </span>
                 )}
               </button>
               <button
                 onClick={newConversation}
-                className="px-3 py-2 text-sm border border-gray-200 rounded-lg hover:bg-gray-50"
-                title="Nueva conversación"
+                className="px-2 py-1.5 sm:px-3 sm:py-2 text-xs sm:text-sm border border-gray-200 rounded-lg hover:bg-gray-50"
+                title="Nueva"
               >
                 ✨
               </button>
@@ -449,16 +450,16 @@ export default function AIAssistantUniversal() {
               <select
                 value={aiProvider}
                 onChange={(e) => setAiProvider(e.target.value as any)}
-                className="px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-gray-900"
+                className="px-2 py-1.5 sm:px-3 sm:py-2 text-[10px] sm:text-xs md:text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-gray-900 max-w-[100px] sm:max-w-none"
               >
-                <option value="groq">🚀 Groq (Texto)</option>
+                <option value="groq">🚀 Groq</option>
                 <option value="gemini">🌟 Gemini</option>
                 <option value="openai">🧠 GPT-4</option>
                 <option value="local">💻 Local</option>
               </select>
               {selectedImage && (
-                <span className="text-xs text-purple-600 font-medium flex items-center gap-1 animate-pulse">
-                  📸 Usando Gemini Vision
+                <span className="text-[10px] sm:text-xs text-purple-600 font-medium flex items-center gap-1 animate-pulse">
+                  📸 Gemini
                 </span>
               )}
               {aiProvider !== "local" && !selectedImage && (
@@ -466,10 +467,10 @@ export default function AIAssistantUniversal() {
                   href={aiProvider === 'groq' ? 'https://console.groq.com/' : 'https://aistudio.google.com/app/apikey'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-blue-600 hover:text-blue-700 underline whitespace-nowrap"
+                  className="text-[10px] sm:text-xs text-blue-600 hover:text-blue-700 underline whitespace-nowrap hidden lg:inline"
                   title="Obtén tu API key gratis"
                 >
-                  Get API Key
+                  Get Key
                 </a>
               )}
             </div>
@@ -477,14 +478,14 @@ export default function AIAssistantUniversal() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-4">
+        <div className="flex-1 overflow-y-auto p-3 sm:p-4 md:p-6 space-y-2 sm:space-y-3 md:space-y-4">
           {messages.map((msg, index) => (
             <div
               key={index}
               className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`max-w-[85%] rounded-2xl p-4 shadow-sm ${
+                className={`max-w-[90%] sm:max-w-[85%] rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-sm ${
                   msg.role === "user"
                     ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white"
                     : "bg-white text-gray-900 border border-gray-200"
@@ -547,27 +548,27 @@ export default function AIAssistantUniversal() {
         </div>
 
         {/* Input */}
-        <div className="p-6 border-t border-gray-100 bg-gray-50">
+        <div className="p-3 sm:p-4 md:p-6 border-t border-gray-100 bg-gray-50">
           {/* Image Preview */}
           {selectedImage && (
-            <div className="mb-4 relative inline-block">
+            <div className="mb-2 sm:mb-4 relative inline-block">
               <img 
                 src={selectedImage} 
                 alt="Preview" 
-                className="max-h-32 rounded-lg border-2 border-purple-300"
+                className="max-h-20 sm:max-h-32 rounded-lg border-2 border-purple-300"
               />
               <button
                 onClick={removeImage}
                 className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3 h-3 sm:w-4 sm:h-4" />
               </button>
             </div>
           )}
-          
-          <div className="flex gap-3">
+
+          <div className="flex gap-1 sm:gap-2 md:gap-3">
             {/* Hidden file input */}
-            <input
+            <input 
               ref={fileInputRef}
               type="file"
               accept="image/*"
@@ -579,51 +580,51 @@ export default function AIAssistantUniversal() {
             <button
               onClick={() => fileInputRef.current?.click()}
               disabled={isLoading}
-              className="px-4 py-3 bg-white border-2 border-purple-300 text-purple-600 rounded-xl hover:bg-purple-50 transition-all flex items-center gap-2 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 bg-white border-2 border-purple-300 text-purple-600 rounded-lg sm:rounded-xl hover:bg-purple-50 transition-all flex items-center gap-1 sm:gap-2 font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
               title="Subir imagen"
             >
-              <ImageIcon className="w-5 h-5" />
+              <ImageIcon className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
-            
+
             {/* Voice input button */}
             {voiceEnabled && (
               <button
                 onClick={() => isListening ? stopListening() : startListening()}
                 disabled={isLoading}
-                className={`px-4 py-3 border-2 rounded-xl transition-all flex items-center gap-2 font-semibold disabled:opacity-50 disabled:cursor-not-allowed ${
+                className={`px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 border-2 rounded-lg sm:rounded-xl transition-all flex items-center gap-1 sm:gap-2 font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 ${
                   isListening 
                     ? 'bg-red-500 border-red-500 text-white animate-pulse' 
                     : 'bg-white border-green-400 text-green-600 hover:bg-green-50'
                 }`}
-                title={isListening ? "Detener grabación" : "Grabar voz"}
+                title={isListening ? "Detener" : "Grabar"}
               >
-                {isListening ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+                {isListening ? <MicOff className="w-4 h-4 sm:w-5 sm:h-5" /> : <Mic className="w-4 h-4 sm:w-5 sm:h-5" />}
               </button>
             )}
-            
+
             <input
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && !isLoading && handleSend()}
-              placeholder={selectedImage ? "Describe lo que quieres saber de la imagen..." : "Pregunta lo que necesites: matemáticas, inglés, programación..."}
+              placeholder={selectedImage ? "Describe la imagen..." : "Pregunta lo que necesites..."}
               disabled={isLoading}
-              className="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-gray-900 placeholder-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 md:py-3 text-xs sm:text-sm md:text-base border border-gray-200 rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 bg-white text-gray-900 placeholder-gray-500 disabled:opacity-50 disabled:cursor-not-allowed min-w-0"
             />
             <button
               onClick={handleSend}
               disabled={isLoading || (!message.trim() && !selectedImage)}
-              className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-xl hover:shadow-lg transition-all flex items-center gap-2 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white rounded-lg sm:rounded-xl hover:shadow-lg transition-all flex items-center gap-1 sm:gap-2 font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 text-xs sm:text-sm"
             >
               {isLoading ? (
                 <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Pensando...
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  <span className="hidden sm:inline">Pensando...</span>
                 </>
               ) : (
                 <>
-                  <Send className="w-5 h-5" />
-                  Enviar
+                  <Send className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="hidden sm:inline">Enviar</span>
                 </>
               )}
             </button>
@@ -631,9 +632,9 @@ export default function AIAssistantUniversal() {
         </div>
       </div>
 
-      {/* Suggestions Sidebar */}
-      <div className="space-y-6">
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+      {/* Suggestions Sidebar - Hidden on mobile */}
+      <div className="hidden lg:block space-y-4 xl:space-y-6">
+        <div className="bg-white rounded-xl xl:rounded-2xl p-4 xl:p-6 shadow-lg border border-gray-100">
           <div className="flex items-center gap-2 mb-4">
             <Zap className="w-5 h-5 text-yellow-600" />
             <h3 className="text-lg font-bold text-gray-800">Materias Rápidas</h3>
